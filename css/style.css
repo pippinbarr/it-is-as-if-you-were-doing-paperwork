@@ -1,0 +1,156 @@
+:root {
+  --default-border: 1px solid black;
+  --default-padding: 0.5em;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-size: 12px;
+  font-family: Helvetica, sans-serif;
+}
+
+.page {
+  display: block;
+  width: 8.5in;
+  height: 10.5in;
+  margin: 0;
+  padding: 0;
+  page-break-after: always;
+}
+
+.form {
+  margin: 1em;
+  border-right: var(--default-border);
+  border-bottom: var(--default-border);
+}
+
+.title {
+  font-weight: bold;
+  font-size: 1.5em;
+  padding: var(--default-padding);
+  border-top: var(--default-border);
+  border-left: var(--default-border);
+}
+
+.title-form-id {
+  background-color: black;
+  color: white;
+  padding: 0.1em;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+}
+
+#tasks {
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+.column {
+  padding: 0;
+  margin: 0;
+  display: grid;
+}
+
+.task {
+  padding: var(--default-padding);
+  border-top: var(--default-border);
+  border-left: var(--default-border);
+}
+
+.section-heading {
+  font-weight: bold;
+  margin-bottom: 0.5em;
+  display: grid;
+  grid-template-columns: 2em auto;
+}
+
+.section-number {
+  background-color: black;
+  color: white;
+  padding: 0.25em;
+  margin-left: -0.5em;
+  margin-top: -0.5em;
+  margin-right: 1em;
+  width: 1em;
+  height: 1em;
+  text-align: center;
+}
+
+.checkboxes {
+  white-space: normal;
+}
+
+.checkbox {
+  white-space: nowrap;
+}
+
+.highlight {
+  text-decoration: underline;
+}
+
+.table {
+  display: grid;
+  border-bottom: var(--default-border);
+  border-right: var(--default-border);
+}
+
+.table-entry {
+  border-top: var(--default-border);
+  border-left: var(--default-border);
+  padding: 0.25em;
+}
+
+.box-container {
+  display: grid;
+}
+
+/* .box-padding {
+  width: 2em;
+} */
+
+.box {
+  border: var(--default-border);
+  height: 2em;
+}
+
+.counting-table {
+  grid-template-columns: auto 3em;
+}
+
+.adding-table {
+  grid-template-columns: 50% 50%;
+}
+
+.numbers {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  border-top: var(--default-border);
+  border-left: var(--default-border);
+  /* place-items: center; */
+}
+
+.number {
+  border-bottom: var(--default-border);
+  border-right: var(--default-border);
+  text-align: center;
+  padding-top: 0.5em;
+  /* vertical-align: middle; */
+  height: 1.5em;
+}
+
+.stamp-area {
+  height: 5em;
+  border: 1px dashed black;
+}
+
+.act {
+
+}
+
+@page{
+  size: letter;
+  margin: 0;
+}
