@@ -2,7 +2,7 @@
 
 ![](images/it-is-as-if-you-were-doing-paperwork-banner.png)
 
-# [Paperwork generator and Instructions](https://www.pippinbarr.com/it-is-as-if-you-were-doing-paperwork)
+# [Click here for paperwork generator and instructions](https://www.pippinbarr.com/it-is-as-if-you-were-doing-paperwork)
 
 ## Description
 *It is as if you were doing paperwork* is a game of doing paperwork. At its heart is a paperwork generator that creates forms that contain precise instructions for filling them out. You can't go wrong. It's an analog spiritual successor to my game [*It is as if you were doing work*](https://www.pippinbarr.com/itisasifyouweredoingwork/info), developed for the ["What Are the Rules?"](https://v-a-c.org/en/ges2/festival-of-play-and-games-what-are-the-rules) festival at the [VAC](https://v-a-c.org/) in Moscow.
