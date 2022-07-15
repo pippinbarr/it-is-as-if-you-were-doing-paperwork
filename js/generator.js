@@ -1,5 +1,3 @@
-const NUM_FORMS = 100;
-
 let data;
 
 // Tracking repeated instructions
@@ -9,12 +7,21 @@ let signatureAction = `Sign`;
 let dateModifier = `a`;
 let dates;
 
+let params = new URLSearchParams(window.location.search)
+let NUM_FORMS = 100;
+if (params.has(`n`)) {
+  NUM_FORMS = params.get(`n`);
+}
+
+
 $.getJSON(`assets/data/en.json`, (language) => {
   data = language;
 
   for (let i = 0; i < NUM_FORMS; i++) {
     form();
   }
+
+  window.print();
 });
 
 function form() {
@@ -30,20 +37,21 @@ function form() {
   let $form = $(`<div class="form"></div>`);
   let $tasks = $(`<div id="tasks"></div>`)
 
-  $(`body`).append($page);
+  $(`body`)
+    .append($page);
   $page.append($form);
   $form.append(title());
   $form.append($tasks);
 
-  column(true, $tasks,$page,$form);
-  column(false, $tasks,$page,$form);
+  column(true, $tasks, $page, $form);
+  column(false, $tasks, $page, $form);
 }
 
 function title() {
   let title = data.form_title
-    .replace(/##id##/,formID())
-    .replace(/##purpose##/,random(data.purposes))
-    .replace(/##technology##/,technology())
+    .replace(/##id##/, formID())
+    .replace(/##purpose##/, random(data.purposes))
+    .replace(/##technology##/, technology())
   let $title = $(`<div class="title">${title}</div>`);
   return $title;
 }
@@ -53,7 +61,7 @@ function formID() {
   let id = ``;
   for (let i = 0; i < length; i++) {
     let char = Math.random() < 0.75 ? random(data.alphabet) : random(data.numbers);
-    if (Math.random() < 0.2 && i > 0 && i < length-1) {
+    if (Math.random() < 0.2 && i > 0 && i < length - 1) {
       char = `/`;
     }
     id += char;
@@ -65,7 +73,7 @@ function formPurpose() {
   return random(data.purposes);
 }
 
-function column(first,$tasks,$page,$form) {
+function column(first, $tasks, $page, $form) {
   const generators = [act, act, circleNumber, reference, duplicates, date, checkboxes, highlighter, signature, counting, stamp, initial, read, adding, yesno];
 
 
@@ -99,7 +107,7 @@ function checkboxes() {
   for (let i = 0; i < n; i++) {
     let tech = technology();
     techs.push(tech);
-    $checkboxes.append(checkbox(tech,i));
+    $checkboxes.append(checkbox(tech, i));
   }
   let selectedTechs = techs.filter(tech => Math.random() < 0.2);
   if (selectedTechs.length === 0) {
@@ -108,8 +116,8 @@ function checkboxes() {
   let selections = selectedTechs.join(`, `);
 
   let instruction = random(data.instruction.checkboxes)
-    .replace(/##number##/,random(data.spelled_numbers))
-    .replace(/##technology_list##/,selections);
+    .replace(/##number##/, random(data.spelled_numbers))
+    .replace(/##technology_list##/, selections);
   let $instruction = sectionHeading(`${instruction}.`);
   $checkboxes.prepend($instruction);
 
@@ -118,11 +126,11 @@ function checkboxes() {
 
 function yesno() {
   let $yesno = $(`<div class="task yesno"></div>`);
-  $yesno.append(checkbox(`${data.yes}`,1));
-  $yesno.append(checkbox(`${data.no}`,2));
-  let selection = random([`${data.yes}`,`${data.no}`]);
+  $yesno.append(checkbox(`${data.yes}`, 1));
+  $yesno.append(checkbox(`${data.no}`, 2));
+  let selection = random([`${data.yes}`, `${data.no}`]);
   let instruction = data.instruction.yesno
-    .replace(/##choice##/,selection);
+    .replace(/##choice##/, selection);
   let $instruction = sectionHeading(`${instruction}.`);
   $yesno.prepend($instruction);
 
@@ -165,11 +173,11 @@ function highlighter() {
 
 function date() {
   let $date = $(`<div class="task date"></div>`);
-  dates.sort((a,b) => Math.random() - 2);
+  dates.sort((a, b) => Math.random() - 2);
   dateModifier = dates.pop();
   if (!dateModifier) dateModifier = data.any;
   let instruction = data.instruction.date
-    .replace(/##modifier##/,dateModifier);
+    .replace(/##modifier##/, dateModifier);
   let $instruction = sectionHeading(`${instruction}.`);
   $date.append($instruction);
   $date.append(box(``))
@@ -209,7 +217,7 @@ function adding() {
   let $adding = $(`<div class="task adding"></div>`);
   let number = 1 + Math.floor(Math.random() * 5);
   let instruction = data.instruction.adding
-    .replace(/##number##/,number);
+    .replace(/##number##/, number);
   let $instruction = sectionHeading(`${instruction}.`);
   $adding.append($instruction);
 
@@ -227,8 +235,8 @@ function adding() {
 function stamp() {
   let $stamp = $(`<div class="task stamp"></div>`);
   let instruction = data.instruction.stamping
-    .replace(/##technology##/,technology())
-    .replace(/##group##/,random(data.groups));
+    .replace(/##technology##/, technology())
+    .replace(/##group##/, random(data.groups));
   let $instruction = sectionHeading(`${instruction}.`);
   $stamp.append($instruction);
 
@@ -249,7 +257,7 @@ function initial() {
   let $initial2 = $(`<div class="task initial"></div>`)
   let $instruction2 = sectionHeading(`${data.instruction.initial2}: ______`);
   $initial2.append($instruction2);
-  $initial.append($initial1,$initial2);
+  $initial.append($initial1, $initial2);
 
   return $initial;
 }
@@ -281,7 +289,7 @@ function duplicates() {
 function reference() {
   let $reference = $(`<div class="task reference"></div>`);
   let instruction = data.instruction.reference
-    .replace(/##form_id##/,formID());
+    .replace(/##form_id##/, formID());
   let $instruction = sectionHeading(`${instruction}.`);
 
   $reference.append($instruction);
@@ -309,7 +317,7 @@ function circleNumber() {
   let $circleNumber = $(`<div class="task circle-number"></div>`);
   let number = Math.floor(Math.random() * 9) + 1;
   let instruction = data.instruction.circle_number
-    .replace(/##number##/,number);
+    .replace(/##number##/, number);
   let $instruction = sectionHeading(`${instruction}.`);
   $circleNumber.append($instruction);
 
@@ -350,7 +358,7 @@ function random(array) {
 }
 
 function sectionHeading(string) {
-   return $(`<div class="section-heading"><span><div class="section-number">${getSection()}</div></span><span>${string}</span></div>`);
+  return $(`<div class="section-heading"><span><div class="section-number">${getSection()}</div></span><span>${string}</span></div>`);
 }
 
 function getSection() {

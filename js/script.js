@@ -1,6 +1,8 @@
 "use strict";
 
-const MAX_FORMS = 200;
-let formNum = 0;
-
-let p = new p5(FormGenerator);
+$(`#generate`)
+  .on(`click`, () => {
+    let n = $(`#number-of-pages`)
+      .val();
+    window.open(`generator.html?n=${n}`, `_blank`);
+  });
